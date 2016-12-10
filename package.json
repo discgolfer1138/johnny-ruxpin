@@ -1,0 +1,23 @@
+{
+  "name": "johnny-ruxpin",
+  "version": "1.0.0",
+  "description": "hacking a Teddy Euxpin with a C.H.I.P. and JohnnyFive",
+  "main": "index.js",
+  "dependencies": {
+    "chip-io": "^2.1.0",
+    "johnny-five": "^0.10.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/discgolfer1138/johnny-ruxpin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/discgolfer1138/johnny-ruxpin/issues"
+  },
+  "homepage": "https://github.com/discgolfer1138/johnny-ruxpin#readme"
+}
