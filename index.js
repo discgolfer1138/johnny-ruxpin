@@ -8,7 +8,11 @@ var board = new five.Board({
 board.on('ready', function() {
   console.log('board ready', Date.now());
 
-  var motor = new five.Motor(['PWM0', 'XIO-P0', 'XIO-P2']);
+  var motor = new five.Motor({
+    pwm:'PWM0', 
+    cdir: 'XIO-P0', 
+    dir: 'XIO-P2'
+  });
 
   motor.on('forward', function() {
     console.log('forward', Date.now());
