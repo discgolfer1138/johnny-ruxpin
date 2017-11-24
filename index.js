@@ -1,7 +1,7 @@
-var five = require('johnny-five');
-var Chip = require('chip-io');
+const five = require('johnny-five');
+const Chip = require('chip-io');
 
-var board = new five.Board({
+let board = new five.Board({
   io: new Chip()
 });
 
