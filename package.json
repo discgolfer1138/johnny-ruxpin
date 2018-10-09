@@ -1,7 +1,7 @@
 {
   "name": "johnny-ruxpin",
   "version": "1.0.0",
-  "description": "hacking a Teddy Euxpin with a C.H.I.P. and ",
+  "description": "hacking a Teddy Ruxpin with a RasPi and Johnny-Five",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/yamanote1138/johnny-ruxpin#readme",
   "dependencies": {
-    "chip-io": "^2.1.1",
-    "johnny-five": "^0.11.7"
+    "johnny-five": "^1.0.0",
+    "raspi-io": "9.0.0"
   }
 }

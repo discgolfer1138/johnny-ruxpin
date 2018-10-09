@@ -1,36 +1,37 @@
+// Test file for using the Raspberry Pi and Johnny-Five
 const five = require('johnny-five');
-const Chip = require('chip-io');
+const raspi = require('raspi-io');
 
-let board = new five.Board({
-  io: new Chip()
+// Make a new `Board()` instance and use raspi-io
+const board = new five.Board({
+  io: new raspi(),
 });
 
+// Run Board
 board.on('ready', function() {
-  console.log('board ready', Date.now());
-
-  var motor = new five.Motor({
-    pwm:'PWM0', 
-    cdir: 'XIO-P0', 
-    dir: 'XIO-P2'
+  // LED Pin variable
+  const led = new five.Led('P1-7');
+  led.on();
+  this.repl.inject({
+    on: () => {
+      led.on();
+    },
+    off: () => {
+      led.stop().off();
+    },
+    strobe: () => {
+      led.stop().off();
+      led.strobe();
+    },
+    blink: () => {
+      led.stop().off();
+      led.blink(500);
+    },
   });
 
-  motor.on('forward', function() {
-    console.log('forward', Date.now());
-
-    // demonstrate switching to reverse after 5 seconds
-    board.wait(5000, function() {
-      motor.reverse(50);
-    });
+  // When this script is stopped, turn the LED off
+  // This is just for convenience
+  this.on('exit', function() {
+    led.stop().off();
   });
-
-  motor.on('reverse', function() {
-    console.log('reverse', Date.now());
-
-    // demonstrate stopping after 5 seconds
-    board.wait(5000, function() {
-      motor.stop();
-    });
-  });
-
-  motor.forward(50);
-});
+}); 
