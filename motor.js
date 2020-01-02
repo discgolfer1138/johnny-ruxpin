@@ -16,7 +16,14 @@ board.on('ready', function() {
   // let BIN2 = 'GPIO27'; //13
   // let BIN1 = 'GPIO22'; //15
 
-  const eyes =  new Motor([PWMA, AIN2, AIN1]);
+  const eyes =  new Motor({
+    pins: {
+      pwm: PWMA,
+      dir: AIN2,
+      cdir: AIN1
+    }
+  });
+
   // eyes.on('forward', function(err) {
   //   console.log(err);
   //   // demonstrate braking after 5 seconds
