@@ -1,16 +1,23 @@
-// Test file for using the Raspberry Pi and Johnny-Five
-const five = require('johnny-five');
-const raspi = require('raspi-io');
+var mockFirmata = require('mock-firmata');
+var five = require('johnny-five');
+var Board = five.Board;
 
-// Make a new `Board()` instance and use raspi-io
-const board = new five.Board({
-  io: new raspi(),
+var board = new Board({
+  io: new mockFirmata.Firmata(), 
+  debug: true,
+  repl: false 
 });
+
+// // Make a new `Board()` instance and use raspi-io
+// const board = new five.Board({
+//   io: new raspi(),
+// });
 
 // Run Board
 board.on('ready', function() {
   // LED Pin variable
   const led = new five.Led('P1-7');
+  console.log('doin stuff');
   led.on();
   this.repl.inject({
     on: () => {
