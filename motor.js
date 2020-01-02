@@ -24,13 +24,12 @@ board.on('ready', function() {
     }
   });
 
-  // eyes.on('forward', function(err) {
-  //   console.log(err);
-  //   // demonstrate braking after 5 seconds
-  //   board.wait(3000, function() {
-  //     eyes.stop();
-  //   });
-  // });
+  board.repl.inject({
+    eyes
+  });
 
-  eyes.stop().forward(200);
+  // Go forward at full speed for 5 seconds
+  console.log('Full speed ahead!');
+  eyes.forward(255);
+  board.wait(4900, eyes.stop);
 });
