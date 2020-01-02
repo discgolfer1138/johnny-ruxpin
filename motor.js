@@ -6,9 +6,9 @@ var board = new Board({
 });
 
 board.on('ready', function() {
-  let PWMA = 12;
-  let AIN2 = 16;
-  let AIN1 = 18;
+  let PWMA = '12';
+  let AIN2 = '16';
+  let AIN1 = '18';
 
   // STBY = 22
 
