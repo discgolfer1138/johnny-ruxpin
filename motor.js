@@ -16,24 +16,25 @@ board.on('ready', function() {
   // let BIN2 = 'GPIO27'; //13
   // let BIN1 = 'GPIO22'; //15
 
-  const standby_pin = new Pin(STBY);
+  // const standby_pin = new Pin(STBY);
 
   const eyes =  new Motor({
     pins: {
       pwm: PWMA,
       dir: AIN2,
-      cdir: AIN1
+      cdir: AIN1,
+      brake: STBY
     }
   });
 
-  board.on('exit', () => {
-    standby_pin.low();
-  });
+  // board.on('exit', () => {
+  //   standby_pin.low();
+  // });
 
-  standby_pin.high();
+  // standby_pin.high();
 
   // Go forward at full speed for 5 seconds
   console.log('Full speed ahead!');
   eyes.forward(255);
-  board.wait(4900, eyes.stop);
+  board.wait(2000, eyes.stop);
 });
