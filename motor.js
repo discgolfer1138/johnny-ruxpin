@@ -25,5 +25,5 @@ board.on('ready', function() {
     });
   });
 
-  eyes.stop().forward(100);
+  eyes.stop().forward(200);
 });
