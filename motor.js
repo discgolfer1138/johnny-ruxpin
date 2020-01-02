@@ -6,15 +6,15 @@ var board = new Board({
 });
 
 board.on('ready', function() {
-  let PWMA = '12';
-  let AIN2 = '16';
-  let AIN1 = '18';
+  let PWMA = 'GPIO18'; //12
+  let AIN2 = 'GPIO23'; //16
+  let AIN1 = 'GPIO24'; //18
 
-  // STBY = 22
+  // let STBY = 'GPIO25'; //22
 
-  // PWMB = 11
-  // BIN2 = 13
-  // BIN1 = 15
+  // let PWMB = 'GPIO17'; //11
+  // let BIN2 = 'GPIO27'; //13
+  // let BIN1 = 'GPIO22'; //15
 
   const eyes =  new Motor([PWMA, AIN2, AIN1]);
   eyes.on('forward', function(err) {
