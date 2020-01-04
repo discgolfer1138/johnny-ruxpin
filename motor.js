@@ -6,11 +6,11 @@ var board = new Board({
 });
 
 board.on('ready', function() {
-  let PWMA = 'GPIO18'; //12
-  let AIN2 = 'GPIO23'; //16
-  let AIN1 = 'GPIO24'; //18
+  const PWMA = 'GPIO18'; //12
+  const AIN2 = 'GPIO23'; //16
+  const AIN1 = 'GPIO24'; //18
 
-  let STBY = 'GPIO25'; //22
+  const STBY = 'GPIO25'; //22
 
   // let PWMB = 'GPIO17'; //11
   // let BIN2 = 'GPIO27'; //13
@@ -18,7 +18,7 @@ board.on('ready', function() {
 
   const standby_pin = new Pin(STBY);
 
-  const eyes =  new Motor({
+  let eyes =  new Motor({
     pins: {
       pwm: PWMA,
       dir: AIN2,
@@ -27,6 +27,7 @@ board.on('ready', function() {
   });
 
   board.on('exit', () => {
+    eyes.stop();
     standby_pin.low();
   });
 
@@ -34,6 +35,6 @@ board.on('ready', function() {
 
   // Go forward at full speed for 5 seconds
   console.log('Full speed ahead!');
-  eyes.forward(255);
+  eyes.stop().forward();
   board.wait(2000, eyes.stop);
 });
