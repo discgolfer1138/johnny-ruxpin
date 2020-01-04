@@ -15,6 +15,7 @@ var board = new Board({
   io: new Raspi()
 });
 
+
 board.on('ready', () => {
   let motor = new Motor({
     pins: {
@@ -31,28 +32,8 @@ board.on('ready', () => {
 
   // listen for the "keypress" event
   var stopmotor;
-  process.stdin.on('keypress', function(ch, key){
-    if(key){      
-      if(stopmotor){
-        clearTimeout(stopmotor);
-      }
-      switch(key.name){
-        case 'up':
-          console.log('^');
-          motor.forward();
-          break;
-        case 'down':
-          console.log('V');
-          motor.reverse();
-          break;
-        default:
-          if(key.ctrl && key.name == 'c'){
-            process.stdin.pause();
-          }
-          break;
-        }
-      }
-    }
+  process.stdin.on('keypress', (ch, key) =>{
+
     stopmotor = setTimeout(function(){
       motor.stop();
     }, 100);
