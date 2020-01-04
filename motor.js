@@ -34,6 +34,11 @@ board.on('ready', () => {
   eyes_motor.stop();
   mouth_motor.stop();
 
+  board.on('exit', () => {
+    eyes_motor.stop();
+    mouth_motor.stop();
+  });
+
   let bear = {
     eyes:{
       open: () => {
