@@ -28,6 +28,7 @@ board.on('ready', function() {
 
   board.on('error', () => {
     standby_pin.low();
+    console.log('I blew up');
   });
 
   board.on('exit', () => {
