@@ -19,8 +19,7 @@ board.on('ready', () => {
     pins: {
       pwm: PWMA,
       dir: AIN1,
-      cdir: AIN2,
-      enable: STBY
+      cdir: AIN2
     },
     invertPWM: true
   });
@@ -30,30 +29,14 @@ board.on('ready', () => {
   });
 
   motor.on('stop', () => {
-    console.log(`automated stop on timer: ${Date.now()}`);
+    console.log(`stop: ${Date.now()}`);
   });
 
   motor.on('forward', () => {
     console.log(`forward: ${Date.now()}`);
-
-    // enable the motor after 2 seconds
-    board.wait(2000, motor.enable);
   });
 
-  motor.on('enable', () => {
-    console.log(`motor enabled: ${Date.now()}`);
-
-    // enable the motor after 2 seconds
-    board.wait(2000, motor.stop);
+  motor.on('reverse', () => {
+    console.log(`reverse: ${Date.now()}`);
   });
-
-  motor.on('disable', () => {
-    console.log(`motor disabled: ${Date.now()}`);
-  });
-
-  // disable the motor
-  motor.disable();
-
-  // set the motor going forward full speed (nothing happen)
-  motor.forward(255);
 });
