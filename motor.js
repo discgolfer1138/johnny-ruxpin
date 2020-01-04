@@ -15,7 +15,7 @@ var board = new Board({
 });
 
 board.on('ready', () => {
-  const motor = new Motor({
+  let motor = new Motor({
     pins: {
       pwm: PWMA,
       dir: AIN1,
