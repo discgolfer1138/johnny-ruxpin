@@ -33,7 +33,7 @@ board.on('ready', function() {
 
   ain1_pin.high();
   ain2_pin.low();
-  pwma_pin.analogWrite(255);
+  board.io.pwmWrite(PWMA, 255);
   stby_pin.low();
 
   // Go forward at full speed for 2 seconds
@@ -43,6 +43,6 @@ board.on('ready', function() {
     stby_pin.high();
     ain1_pin.low();
     ain2_pin.low();
-    pwma_pin.analogWrite(0);
+    board.io.pwmWrite(PWMA, 0);
   });
 });
