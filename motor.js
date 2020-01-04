@@ -1,5 +1,6 @@
 const {Board, Motor} = require('johnny-five');
 const Raspi = require('raspi-io').RaspiIO;
+const keypress = require('keypress');
 
 // pin configuration
 const PWMA = 'GPIO18'; //12 - motor A speed
@@ -25,19 +26,38 @@ board.on('ready', () => {
 
   motor.stop();
 
-  board.repl.inject({
-    motor
+  // make `process.stdin` begin emitting "keypress" events
+  keypress(process.stdin);
+
+  // listen for the "keypress" event
+  var stopmotor;
+  process.stdin.on('keypress', function(ch, key){
+    if(key){      
+      if(stopmotor){
+        clearTimeout(stopmotor);
+      }
+      switch(key.name){
+        case 'up':
+          console.log('^');
+          motor.forward();
+          break;
+        case 'down':
+          console.log('V');
+          motor.reverse();
+          break;
+        default:
+          if(key.ctrl && key.name == 'c'){
+            process.stdin.pause();
+          }
+          break;
+        }
+      }
+    }
+    stopmotor = setTimeout(function(){
+      motor.stop();
+    }, 100);
   });
 
-  motor.on('stop', () => {
-    console.log(`stop: ${Date.now()}`);
-  });
-
-  motor.on('forward', () => {
-    console.log(`forward: ${Date.now()}`);
-  });
-
-  motor.on('reverse', () => {
-    console.log(`reverse: ${Date.now()}`);
-  });
+  process.stdin.setRawMode(true);
+  process.stdin.resume();
 });
