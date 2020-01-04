@@ -1,4 +1,4 @@
-const {Board, Motor, Pin} = require('johnny-five');
+const {Board, Pin} = require('johnny-five');
 const Raspi = require('raspi-io').RaspiIO;
 
 var board = new Board({
@@ -6,40 +6,43 @@ var board = new Board({
 });
 
 board.on('ready', function() {
-  const PWMA = 'GPIO18'; //12
-  const AIN2 = 'GPIO23'; //16
-  const AIN1 = 'GPIO24'; //18
+  // pin configuration
+  const PWMA = 'GPIO18'; //12 - motor A speed
+  const AIN1 = 'GPIO24'; //18 - motor A dir
+  const AIN2 = 'GPIO23'; //16 - motor A cdir
+  const STBY = 'GPIO25'; //22 - 
+  // const PWMB = 'GPIO17'; //11
+  // const BIN1 = 'GPIO22'; //15
+  // const BIN2 = 'GPIO27'; //13
 
-  const STBY = 'GPIO25'; //22
+  // instantiate pins
+  let stby_pin = new Pin({pin:STBY, mode:Pin.OUTPUT});
+  let pwma_pin = new Pin({pin:PWMA, mode:Pin.PWM});
+  let ain1_pin = new Pin({pin:AIN1, mode:Pin.OUTPUT});
+  let ain2_pin = new Pin({pin:AIN2, mode:Pin.OUTPUT});
 
-  // let PWMB = 'GPIO17'; //11
-  // let BIN2 = 'GPIO27'; //13
-  // let BIN1 = 'GPIO22'; //15
-
-  const standby_pin = new Pin(STBY);
-
-  let eyes =  new Motor({
-    pins: {
-      pwm: PWMA,
-      dir: AIN2,
-      cdir: AIN1
-    }
-  });
-
-  board.on('error', () => {
-    standby_pin.low();
+  board.on('fail', () => {
+    stby_pin.low();
     console.log('I blew up');
   });
 
   board.on('exit', () => {
-    eyes.stop();
-    standby_pin.low();
+    stby_pin.low();
+    console.log('successfully exited');
   });
 
-  standby_pin.low();
+  ain1_pin.high();
+  ain2_pin.low();
+  pwma_pin.write(255);
+  stby_pin.low();
 
-  // Go forward at full speed for 5 seconds
-  console.log('Full speed ahead!');
-  eyes.forward();
-  board.wait(2000, eyes.stop);
+  // Go forward at full speed for 2 seconds
+  console.log('starting motor');
+
+  board.wait(2000, ()=>{
+    stby_pin.high();
+    ain1_pin.low();
+    ain2_pin.low();
+    pwma_pin.write(0);
+  });
 });
