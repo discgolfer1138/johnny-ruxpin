@@ -57,5 +57,5 @@ board.on('ready', () => {
     }
   };
 
-  this.repl.inject(bear);
+  board.repl.inject(bear);
 });
