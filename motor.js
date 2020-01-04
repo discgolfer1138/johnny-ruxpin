@@ -20,8 +20,7 @@ board.on('ready', () => {
       pwm: PWMA,
       dir: AIN1,
       cdir: AIN2
-    },
-    invertPWM: true
+    }
   });
 
   motor.stop();
