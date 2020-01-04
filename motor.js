@@ -24,6 +24,8 @@ board.on('ready', () => {
     invertPWM: true
   });
 
+  motor.stop();
+
   board.repl.inject({
     motor
   });
