@@ -27,12 +27,33 @@ board.on('ready', () => {
 
   motor.stop();
 
-  // make `process.stdin` begin emitting "keypress" events
+  // make process.stdin begin emitting "keypress" events
   keypress(process.stdin);
 
   // listen for the "keypress" event
   var stopmotor;
   process.stdin.on('keypress', (ch, key) =>{
+    if(key){
+      if(stopmotor){
+        clearTimeout(stopmotor);
+      }
+
+      switch(key.name){
+        case 'up':
+          console.log('^');
+          motor.forward();
+          break;
+        case 'down':
+          console.log('V');
+          motor.reverse();
+          break;
+        default:
+          if(key.ctrl && key.name == 'c'){
+            process.stdin.pause();
+          }
+          break;
+      }
+    }
 
     stopmotor = setTimeout(function(){
       motor.stop();
