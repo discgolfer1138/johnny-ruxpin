@@ -37,21 +37,21 @@ board.on('ready', () => {
   let bear = {
     eyes:{
       open: () => {
-        eyes_motor.stop().forward();
+        eyes_motor.stop().forward(255);
         board.wait(500, eyes_motor.stop);
       },
       close: () => {
-        eyes_motor.stop().reverse();
+        eyes_motor.stop().reverse(255);
         board.wait(500, eyes_motor.stop);
       }
     },
     mouth:{
       open: () => {
-        mouth_motor.stop().forward();
+        mouth_motor.stop().forward(255);
         board.wait(500, mouth_motor.stop);
       },
       close: () => {
-        mouth_motor.stop().reverse();
+        mouth_motor.stop().reverse(255);
         board.wait(500, mouth_motor.stop);
       }
     }
