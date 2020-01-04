@@ -36,5 +36,5 @@ board.on('ready', function() {
   // Go forward at full speed for 5 seconds
   console.log('Full speed ahead!');
   eyes.forward();
-  board.wait(2000, eyes.stop());
+  board.wait(2000, eyes.stop);
 });
