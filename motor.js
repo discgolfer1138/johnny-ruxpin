@@ -36,7 +36,7 @@ board.on('ready', function() {
     standby_pin.low();
   });
 
-  standby_pin.high();
+  standby_pin.low();
 
   // Go forward at full speed for 5 seconds
   console.log('Full speed ahead!');
