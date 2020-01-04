@@ -1,23 +1,21 @@
 const {Board, Motor} = require('johnny-five');
 const Raspi = require('raspi-io').RaspiIO;
-const keypress = require('keypress');
 
 // pin configuration
 const PWMA = 'GPIO18'; //12 - motor A speed
 const AIN1 = 'GPIO24'; //18 - motor A dir
 const AIN2 = 'GPIO23'; //16 - motor A cdir
-const STBY = 'GPIO25'; //22 - standby
-// const PWMB = 'GPIO17'; //11
-// const BIN1 = 'GPIO22'; //15
-// const BIN2 = 'GPIO27'; //13
+// const STBY = 'GPIO25'; //22 - standby
+const PWMB = 'GPIO17'; //11
+const BIN1 = 'GPIO22'; //15
+const BIN2 = 'GPIO27'; //13
 
 var board = new Board({
   io: new Raspi()
 });
 
-
 board.on('ready', () => {
-  let motor = new Motor({
+  let eyes_motor = new Motor({
     pins: {
       pwm: PWMA,
       dir: AIN1,
@@ -25,41 +23,39 @@ board.on('ready', () => {
     }
   });
 
-  motor.stop();
-
-  // make process.stdin begin emitting "keypress" events
-  keypress(process.stdin);
-
-  // listen for the "keypress" event
-  var stopmotor;
-  process.stdin.on('keypress', (ch, key) =>{
-    if(key){
-      if(stopmotor){
-        clearTimeout(stopmotor);
-      }
-
-      switch(key.name){
-        case 'up':
-          console.log('^');
-          motor.forward();
-          break;
-        case 'down':
-          console.log('V');
-          motor.reverse();
-          break;
-        default:
-          if(key.ctrl && key.name == 'c'){
-            process.stdin.pause();
-          }
-          break;
-      }
+  let mouth_motor = new Motor({
+    pins: {
+      pwm: PWMB,
+      dir: BIN1,
+      cdir: BIN2
     }
-
-    stopmotor = setTimeout(function(){
-      motor.stop();
-    }, 100);
   });
 
-  process.stdin.setRawMode(true);
-  process.stdin.resume();
+  eyes_motor.stop();
+  mouth_motor.stop();
+
+  let bear = {
+    eyes:{
+      open: () => {
+        eyes_motor.stop().forward();
+        board.wait(500, eyes_motor.stop);
+      },
+      close: () => {
+        eyes_motor.stop().reverse();
+        board.wait(500, eyes_motor.stop);
+      }
+    },
+    mouth:{
+      open: () => {
+        mouth_motor.stop().forward();
+        board.wait(500, mouth_motor.stop);
+      },
+      close: () => {
+        mouth_motor.stop().reverse();
+        board.wait(500, mouth_motor.stop);
+      }
+    }
+  };
+
+  this.repl.inject(bear);
 });
