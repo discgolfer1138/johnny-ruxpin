@@ -17,7 +17,7 @@ board.on('ready', function() {
 
   // instantiate pins
   let stby_pin = new Pin({pin:STBY, mode:Pin.OUTPUT});
-  let pwma_pin = new Pin({pin:PWMA, mode:Pin.PWM});
+  // let pwma_pin = new Pin({pin:PWMA, mode:Pin.PWM});
   let ain1_pin = new Pin({pin:AIN1, mode:Pin.OUTPUT});
   let ain2_pin = new Pin({pin:AIN2, mode:Pin.OUTPUT});
 
@@ -31,16 +31,17 @@ board.on('ready', function() {
     console.log('successfully exited');
   });
 
+  // Go forward at full speed
+  console.log('starting motor');
   ain1_pin.high();
   ain2_pin.low();
   board.io.pwmWrite(PWMA, 255);
-  stby_pin.low();
+  stby_pin.high();
 
-  // Go forward at full speed for 2 seconds
-  console.log('starting motor');
-
+  // stop after two seconds
   board.wait(2000, ()=>{
-    stby_pin.high();
+    console.log('stopping motor');
+    stby_pin.low();
     ain1_pin.low();
     ain2_pin.low();
     board.io.pwmWrite(PWMA, 0);
