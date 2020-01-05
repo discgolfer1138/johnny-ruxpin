@@ -32,14 +32,45 @@ board.on('ready', () => {
     }
   });
 
-  eyes.on(['start', 'forward', 'reverse'], () => {
+  eyes.on('start', () => {
+    console.log('eye motor started');
     board.wait(500, eyes.stop);
   });
 
-  mouth.on(['start', 'forward', 'reverse'], () => {
+  eyes.on('forward', () => {
+    console.log('eye motor forward');
+    board.wait(500, eyes.stop);
+  });
+
+  eyes.on('reverse', () => {
+    console.log('eye motor reversed');
+    board.wait(500, eyes.stop);
+  });
+
+  eyes.on('stop', () => {
+    console.log('eye motor stopped');
+    board.wait(500, eyes.stop);
+  });
+
+  mouth.on('start', () => {
+    console.log('mouth motor started');
     board.wait(500, mouth.stop);
   });
 
+  mouth.on('forward', () => {
+    console.log('mouth motor forward');
+    board.wait(500, mouth.stop);
+  });
+
+  mouth.on('reverse', () => {
+    console.log('mouth motor reversed');
+    board.wait(500, mouth.stop);
+  });
+
+  mouth.on('stop', () => {
+    console.log('mouth motor stopped');
+    board.wait(500, mouth.stop);
+  });
 
   eyes.stop();
   mouth.stop();
