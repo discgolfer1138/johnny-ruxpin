@@ -32,11 +32,11 @@ board.on('ready', () => {
     }
   });
 
-  eyes.on('start', () => {
+  eyes.on(['start', 'forward', 'reverse'], () => {
     board.wait(500, eyes.stop);
   });
 
-  mouth.on('start', () => {
+  mouth.on(['start', 'forward', 'reverse'], () => {
     board.wait(500, mouth.stop);
   });
 
