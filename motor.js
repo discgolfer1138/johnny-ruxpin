@@ -70,9 +70,6 @@ board.on('ready', () => {
     console.log('mouth motor stopped');
   });
 
-  eyes.stop();
-  mouth.stop();
-
   board.on('exit', () => {
     eyes.stop();
     mouth.stop();
