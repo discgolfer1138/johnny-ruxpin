@@ -37,32 +37,13 @@ board.on('ready', () => {
     if(eyes.isOn) board.wait(500, eyes.stop);
   });
 
-  eyes.on('forward', () => {
-    console.log('eye motor forward');
-    if(eyes.isOn) board.wait(500, eyes.stop);
-  });
-
-  eyes.on('reverse', () => {
-    console.log('eye motor reversed');
-    if(eyes.isOn) board.wait(500, eyes.stop);
-  });
-
   eyes.on('stop', () => {
     console.log('eye motor stopped');
   });
 
+
   mouth.on('start', () => {
     console.log('mouth motor started');
-    if(mouth.isOn) board.wait(500, mouth.stop);
-  });
-
-  mouth.on('forward', () => {
-    console.log('mouth motor forward');
-    if(mouth.isOn) board.wait(500, mouth.stop);
-  });
-
-  mouth.on('reverse', () => {
-    console.log('mouth motor reversed');
     if(mouth.isOn) board.wait(500, mouth.stop);
   });
 
