@@ -15,7 +15,8 @@ var board = new Board({
 });
 
 board.on('ready', () => {
-  let eyes_motor = new Motor({
+
+  let eyes = new Motor({
     pins: {
       pwm: PWMA,
       dir: AIN1,
@@ -23,7 +24,7 @@ board.on('ready', () => {
     }
   });
 
-  let mouth_motor = new Motor({
+  let mouth = new Motor({
     pins: {
       pwm: PWMB,
       dir: BIN1,
@@ -31,35 +32,26 @@ board.on('ready', () => {
     }
   });
 
-  eyes_motor.stop();
-  mouth_motor.stop();
+  eyes.on('start', () => {
+    board.wait(500, eyes.stop);
+  });
+
+  mouth.on('start', () => {
+    board.wait(500, mouth.stop);
+  });
+
+
+  eyes.stop();
+  mouth.stop();
 
   board.on('exit', () => {
-    eyes_motor.stop();
-    mouth_motor.stop();
+    eyes.stop();
+    mouth.stop();
   });
 
   let bear = {
-    eyes:{
-      open: () => {
-        eyes_motor.stop().forward(255);
-        board.wait(500, eyes_motor.stop);
-      },
-      close: () => {
-        eyes_motor.stop().reverse(255);
-        board.wait(500, eyes_motor.stop);
-      }
-    },
-    mouth:{
-      open: () => {
-        mouth_motor.stop().forward(255);
-        board.wait(500, mouth_motor.stop);
-      },
-      close: () => {
-        mouth_motor.stop().reverse(255);
-        board.wait(500, mouth_motor.stop);
-      }
-    }
+    eyes: eyes,
+    mouth: mouth
   };
 
   board.repl.inject(bear);
