@@ -1,4 +1,4 @@
-const {Board, Motor} = require('johnny-five');
+const {Board, Motor, Sensor} = require('johnny-five');
 const Raspi = require('raspi-io').RaspiIO;
 
 // pin configuration
@@ -9,6 +9,8 @@ const AIN2 = 'GPIO23'; //16 - motor A cdir
 const PWMB = 'GPIO17'; //11
 const BIN1 = 'GPIO22'; //15
 const BIN2 = 'GPIO27'; //13
+
+const POT = 'GPIO25'; //37 - potentiometer
 
 var board = new Board({
   io: new Raspi()
@@ -31,6 +33,8 @@ board.on('ready', () => {
       cdir: BIN2
     }
   });
+
+  const potentiometer = new Sensor(POT);
 
   let bear = {
     eyes: eyes,
@@ -56,6 +60,10 @@ board.on('ready', () => {
 
   mouth.on('stop', () => {
     console.log('mouth motor stopped');
+  });
+
+  potentiometer.on('change', function() {
+    console.log(this.scaleTo(0, 10));
   });
 
   board.on('exit', () => {
