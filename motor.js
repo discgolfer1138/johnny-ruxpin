@@ -34,7 +34,7 @@ board.on('ready', () => {
     }
   });
 
-  const potentiometer = new Sensor(POT);
+  const potentiometer = new Sensor.Digital(POT);
 
   let bear = {
     eyes: eyes,
@@ -63,7 +63,7 @@ board.on('ready', () => {
   });
 
   potentiometer.on('change', function() {
-    console.log(this.scaleTo(0, 10));
+    console.log(this.value);
   });
 
   board.on('exit', () => {
