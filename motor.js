@@ -34,7 +34,7 @@ board.on('ready', () => {
 
   eyes.on('start', () => {
     console.log('eye motor started');
-    if(eyes.isOn) board.wait(500, eyes.stop);
+    if(this.isOn) board.wait(500, this.stop);
   });
 
   eyes.on('stop', () => {
@@ -44,7 +44,7 @@ board.on('ready', () => {
 
   mouth.on('start', () => {
     console.log('mouth motor started');
-    if(mouth.isOn) board.wait(500, mouth.stop);
+    if(this.isOn) board.wait(500, this.stop);
   });
 
   mouth.on('stop', () => {
