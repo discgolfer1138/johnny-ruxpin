@@ -49,7 +49,6 @@ board.on('ready', () => {
 
   eyes.on('stop', () => {
     console.log('eye motor stopped');
-    if(eyes.isOn) board.wait(500, eyes.stop);
   });
 
   mouth.on('start', () => {
@@ -69,7 +68,6 @@ board.on('ready', () => {
 
   mouth.on('stop', () => {
     console.log('mouth motor stopped');
-    if(mouth.isOn) board.wait(500, mouth.stop);
   });
 
   eyes.stop();
