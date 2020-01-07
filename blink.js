@@ -1,5 +1,6 @@
 const {Board, Motor} = require('johnny-five');
 const Raspi = require('raspi-io').RaspiIO;
+const temporal = require('temporal');
 
 // pin configuration
 const PWMA = 'GPIO18'; //12 - motor A speed
@@ -22,11 +23,11 @@ board.on('ready', () => {
 
 
   eyes.rev(255);
-  board.wait(1000, () => {
+  temporal.delay(1000, () => {
     eyes.stop();
   });
   eyes.fwd(255);
-  board.wait(1000, () => {
+  temporal.delay(1000, () => {
     eyes.stop();
   });
 
