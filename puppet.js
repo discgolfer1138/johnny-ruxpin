@@ -6,6 +6,9 @@ const temporal = require('temporal');
 const PWMA = 'GPIO18'; //12 - motor A speed
 const AIN1 = 'GPIO24'; //18 - motor A dir
 const AIN2 = 'GPIO23'; //16 - motor A cdir
+const PWMB = 'GPIO17'; //11 - motor B speed
+const BIN1 = 'GPIO22'; //15 - motor B dir
+const BIN2 = 'GPIO27'; //13 - motor B cdir
 
 var board = new Board({
   io: new Raspi()
@@ -18,6 +21,14 @@ board.on('ready', () => {
       pwm: PWMA,
       dir: AIN1,
       cdir: AIN2
+    }
+  });
+
+  const mouth = new Motor({
+    pins: {
+      pwm: PWMB,
+      dir: BIN1,
+      cdir: BIN2
     }
   });
 
@@ -41,6 +52,26 @@ board.on('ready', () => {
           this.close();
         });
       }
+    },
+    mouth:{
+      open: function(){
+        mouth.fwd(255);
+        temporal.delay(500, () => {
+          mouth.stop();
+        });
+      },
+      close: function(){
+        mouth.rev(255);
+        temporal.delay(500, () => {
+          mouth.stop();
+        });
+      },
+      flap: function(){
+        this.open();
+        board.wait(1000, () => {
+          this.close();
+        });
+      }
     }
   };
 
@@ -48,6 +79,7 @@ board.on('ready', () => {
 
   board.on('exit', () => {
     eyes.stop();
+    mouth.stop();
   });
 
 });
