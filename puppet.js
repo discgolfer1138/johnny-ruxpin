@@ -72,6 +72,20 @@ board.on('ready', () => {
           this.close();
         });
       }
+    },
+    allopen: function(){
+      this.eyes.open();
+      this.mouth.open();
+    },
+    allclose:function(){
+      this.eyes.close();
+      this.mouth.close();
+    },
+    allblink:function(){
+      this.allopen();
+      board.wait(1000, () => {
+        this.allclose();
+      });
     }
   };
 
