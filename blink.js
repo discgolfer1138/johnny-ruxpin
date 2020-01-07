@@ -37,11 +37,11 @@ board.on('ready', () => {
       },
       blink: function(){
         eyes.fwd(255);
-        temporal.delay(1000, () => {
+        temporal.delay(500, () => {
           eyes.stop();
           temporal.delay(1000, () => {
             eyes.rev(255);
-            temporal.delay(1000, () => {
+            temporal.delay(1500, () => {
               eyes.stop();
             });
           });
