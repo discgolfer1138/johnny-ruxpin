@@ -10,8 +10,6 @@ const PWMB = 'GPIO17'; //11
 const BIN1 = 'GPIO22'; //15
 const BIN2 = 'GPIO27'; //13
 
-const POT = 'GPIO25'; //37 - potentiometer
-
 var board = new Board({
   io: new Raspi()
 });
