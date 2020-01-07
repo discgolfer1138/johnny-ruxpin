@@ -24,7 +24,8 @@
     "keypress": "^0.2.1",
     "node-wav-player": "0.0.1",
     "raspi-io": "^10.0.4",
-    "say": "^0.15.0"
+    "say": "^0.15.0",
+    "temporal": "^0.7.1"
   },
   "devDependencies": {
     "mock-firmata": "^0.2.0"
