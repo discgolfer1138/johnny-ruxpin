@@ -25,26 +25,20 @@ board.on('ready', () => {
     eyes:{
       open: function(){
         eyes.fwd(255);
-        temporal.delay(1000, () => {
+        temporal.delay(500, () => {
           eyes.stop();
         });
       },
       close: function(){
         eyes.rev(255);
-        temporal.delay(1000, () => {
+        temporal.delay(500, () => {
           eyes.stop();
         });
       },
       blink: function(){
-        eyes.fwd(255);
-        temporal.delay(500, () => {
-          eyes.stop();
-        });
+        this.open();
         temporal.delay(1000, () => {
-          eyes.rev(255);
-        });
-        temporal.delay(1500, () => {
-          eyes.stop();
+          eyes.close();
         });
       }
     }
