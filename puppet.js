@@ -33,6 +33,7 @@ board.on('ready', () => {
   });
 
   let bear = {
+    self: this,
     eyes:{
       open: function(){
         eyes.fwd(255);
@@ -73,19 +74,21 @@ board.on('ready', () => {
         });
       }
     },
-    allopen: function(){
-      this.eyes.open();
-      this.mouth.open();
-    },
-    allclose:function(){
-      this.eyes.close();
-      this.mouth.close();
-    },
-    allblink:function(){
-      this.allopen();
-      board.wait(1000, () => {
-        this.allclose();
-      });
+    all:{
+      open: function(){
+        self.eyes.open();
+        self.mouth.open();
+      },
+      close:function(){
+        self.eyes.close();
+        self.mouth.close();
+      },
+      blink:function(){
+        self.all.open();
+        board.wait(1000, () => {
+          self.all.close();
+        });
+      }
     }
   };
 
