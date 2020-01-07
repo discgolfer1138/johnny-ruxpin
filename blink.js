@@ -38,7 +38,7 @@ board.on('ready', () => {
       blink: function(){
         this.open();
         temporal.delay(1000, () => {
-          eyes.close();
+          this.close();
         });
       }
     }
