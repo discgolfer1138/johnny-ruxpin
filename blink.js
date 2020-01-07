@@ -24,15 +24,24 @@ board.on('ready', () => {
   let bear = {
     eyes:{
       open: function(){
-        eyes.rev(255);
+        eyes.fwd(255);
         temporal.delay(1000, () => {
           eyes.stop();
         });
       },
       close: function(){
-        eyes.fwd(255);
+        eyes.rev(255);
         temporal.delay(1000, () => {
           eyes.stop();
+        });
+      },
+      blink: function(){
+        eyes.fwd(255);
+        temporal.delay(1000, () => {
+          eyes.rev(255);
+          temporal.delay(1000, () => {
+            eyes.stop();
+          });
         });
       }
     }
