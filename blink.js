@@ -22,9 +22,13 @@ board.on('ready', () => {
 
 
   eyes.rev(255);
-  board.wait(1000,eyes.stop);
+  board.wait(1000, () => {
+    eyes.stop();
+  });
   eyes.fwd(255);
-  board.wait(1000,eyes.stop);
+  board.wait(1000, () => {
+    eyes.stop();
+  });
 
   board.on('exit', () => {
     eyes.stop();
