@@ -1,4 +1,4 @@
-const {Board, Motor, Sensor} = require('johnny-five');
+const {Board, Motor} = require('johnny-five');
 const Raspi = require('raspi-io').RaspiIO;
 
 // pin configuration
@@ -34,8 +34,6 @@ board.on('ready', () => {
     }
   });
 
-  const potentiometer = new Sensor.Digital(POT);
-
   let bear = {
     eyes: eyes,
     mouth: mouth
@@ -60,10 +58,6 @@ board.on('ready', () => {
 
   mouth.on('stop', () => {
     console.log('mouth motor stopped');
-  });
-
-  potentiometer.on('change', function() {
-    console.log(this.value);
   });
 
   board.on('exit', () => {
