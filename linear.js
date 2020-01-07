@@ -13,6 +13,6 @@ board.on('ready', () => {
     pin: SRV
   });
 
-  board.repl.inject(srv);
+  board.repl.inject({srv:srv});
 
 });
