@@ -38,9 +38,12 @@ board.on('ready', () => {
       blink: function(){
         eyes.fwd(255);
         temporal.delay(1000, () => {
-          eyes.rev(255);
+          eyes.stop();
           temporal.delay(1000, () => {
-            eyes.stop();
+            eyes.rev(255);
+            temporal.delay(1000, () => {
+              eyes.stop();
+            });
           });
         });
       }
