@@ -36,13 +36,13 @@ board.on('ready', () => {
     eyes:{
       open: function(){
         eyes.fwd(255);
-        temporal.delay(500, () => {
+        temporal.delay(400, () => {
           eyes.stop();
         });
       },
       close: function(){
         eyes.rev(255);
-        temporal.delay(500, () => {
+        temporal.delay(400, () => {
           eyes.stop();
         });
       },
@@ -56,13 +56,13 @@ board.on('ready', () => {
     mouth:{
       open: function(){
         mouth.fwd(255);
-        temporal.delay(500, () => {
+        temporal.delay(400, () => {
           mouth.stop();
         });
       },
       close: function(){
         mouth.rev(255);
-        temporal.delay(500, () => {
+        temporal.delay(400, () => {
           mouth.stop();
         });
       },
