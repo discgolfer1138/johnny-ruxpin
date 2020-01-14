@@ -48,7 +48,7 @@ board.on('ready', () => {
       },
       blink: function(){
         this.open();
-        board.wait(1000, () => {
+        board.wait(500, () => {
           this.close();
         });
       }
@@ -68,7 +68,7 @@ board.on('ready', () => {
       },
       flap: function(){
         this.open();
-        board.wait(1000, () => {
+        board.wait(500, () => {
           this.close();
         });
       }
@@ -84,7 +84,7 @@ board.on('ready', () => {
       },
       blink:function(){
         this.open();
-        board.wait(1000, () => {
+        board.wait(500, () => {
           this.close();
         });
       }
