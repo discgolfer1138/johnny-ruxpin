@@ -10,6 +10,9 @@ const PWMB = 'GPIO17'; //11 - motor B speed
 const BIN1 = 'GPIO22'; //15 - motor B dir
 const BIN2 = 'GPIO27'; //13 - motor B cdir
 
+const MOTOR_DURATION = 500;
+const BLINK_DELAY = MOTOR_DURATION + 100;
+
 var board = new Board({
   io: new Raspi()
 });
@@ -36,19 +39,19 @@ board.on('ready', () => {
     eyes:{
       open: function(){
         eyes.fwd(255);
-        temporal.delay(400, () => {
+        temporal.delay(MOTOR_DURATION, () => {
           eyes.stop();
         });
       },
       close: function(){
         eyes.rev(255);
-        temporal.delay(400, () => {
+        temporal.delay(MOTOR_DURATION, () => {
           eyes.stop();
         });
       },
       blink: function(){
         this.open();
-        board.wait(500, () => {
+        board.wait(BLINK_DELAY, () => {
           this.close();
         });
       }
@@ -56,19 +59,19 @@ board.on('ready', () => {
     mouth:{
       open: function(){
         mouth.fwd(255);
-        temporal.delay(400, () => {
+        temporal.delay(MOTOR_DURATION, () => {
           mouth.stop();
         });
       },
       close: function(){
         mouth.rev(255);
-        temporal.delay(400, () => {
+        temporal.delay(MOTOR_DURATION, () => {
           mouth.stop();
         });
       },
       flap: function(){
         this.open();
-        board.wait(500, () => {
+        board.wait(BLINK_DELAY, () => {
           this.close();
         });
       }
@@ -84,7 +87,7 @@ board.on('ready', () => {
       },
       blink:function(){
         this.open();
-        board.wait(500, () => {
+        board.wait(BLINK_DELAY, () => {
           this.close();
         });
       }
